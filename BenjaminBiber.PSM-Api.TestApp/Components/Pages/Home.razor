@@ -1,0 +1,168 @@
+﻿@page "/"
+@using System.Text.Json
+@using BenjaminBiber.PSM_Api.Data.Clients
+@using BenjaminBiber.PSM_Api.Data.Services
+
+@inject IPsmApiClient ApiClient
+@inject IPsmExportService ExportService
+
+<PageTitle>PSM API Test</PageTitle>
+
+<h1>PSM API Test</h1>
+
+<div class="mb-4">
+    <button class="btn btn-primary me-2" @onclick="LoadMittelAsync" disabled="@_isMittelLoading">GET Mittel</button>
+    <button class="btn btn-primary me-2" @onclick="LoadWirkstoffAsync" disabled="@_isWirkstoffLoading">GET Wirkstoff</button>
+    <button class="btn btn-primary me-2" @onclick="LoadWirkstoffGehaltAsync" disabled="@_isWirkstoffGehaltLoading">GET Wirkstoff-Gehalt</button>
+    <button class="btn btn-primary me-2" @onclick="LoadAwgAsync" disabled="@_isAwgLoading">GET AWG</button>
+    <button class="btn btn-primary me-2" @onclick="LoadAwgSchadorgAsync" disabled="@_isAwgSchadorgLoading">GET AWG-Schadorg</button>
+    <button class="btn btn-primary me-2" @onclick="LoadKodelistenAsync" disabled="@_isKodelistenLoading">GET Kodelisten</button>
+    <button class="btn btn-primary" @onclick="LoadAggregatesAsync" disabled="@_isAggregatesLoading">GET Mittel (aggregiert)</button>
+</div>
+
+<div class="mb-4">
+    <label class="form-label" for="kodeInput">Kode</label>
+    <div class="d-flex gap-2">
+        <input id="kodeInput" class="form-control" @bind="_kodeInput" />
+        <button class="btn btn-primary" @onclick="LoadKodeAsync" disabled="@_isKodeLoading">GET Kode</button>
+    </div>
+</div>
+
+@if (!string.IsNullOrWhiteSpace(_error))
+{
+    <div class="alert alert-danger" role="alert">@_error</div>
+}
+
+@if (!string.IsNullOrWhiteSpace(_mittelResult))
+{
+    <h2>Mittel</h2>
+    <pre>@_mittelResult</pre>
+}
+
+@if (!string.IsNullOrWhiteSpace(_wirkstoffResult))
+{
+    <h2>Wirkstoff</h2>
+    <pre>@_wirkstoffResult</pre>
+}
+
+@if (!string.IsNullOrWhiteSpace(_wirkstoffGehaltResult))
+{
+    <h2>Wirkstoff-Gehalt</h2>
+    <pre>@_wirkstoffGehaltResult</pre>
+}
+
+@if (!string.IsNullOrWhiteSpace(_awgResult))
+{
+    <h2>AWG</h2>
+    <pre>@_awgResult</pre>
+}
+
+@if (!string.IsNullOrWhiteSpace(_awgSchadorgResult))
+{
+    <h2>AWG-Schadorg</h2>
+    <pre>@_awgSchadorgResult</pre>
+}
+
+@if (!string.IsNullOrWhiteSpace(_kodelistenResult))
+{
+    <h2>Kodelisten</h2>
+    <pre>@_kodelistenResult</pre>
+}
+
+@if (!string.IsNullOrWhiteSpace(_kodeResult))
+{
+    <h2>Kode</h2>
+    <pre>@_kodeResult</pre>
+}
+
+@if (!string.IsNullOrWhiteSpace(_aggregatesResult))
+{
+    <h2>Mittel (aggregiert)</h2>
+    <pre>@_aggregatesResult</pre>
+}
+
+@code {
+    private string _kodeInput = "110";
+    private string? _error;
+    private string? _mittelResult;
+    private string? _wirkstoffResult;
+    private string? _wirkstoffGehaltResult;
+    private string? _awgResult;
+    private string? _awgSchadorgResult;
+    private string? _kodelistenResult;
+    private string? _kodeResult;
+    private string? _aggregatesResult;
+    private bool _isMittelLoading;
+    private bool _isWirkstoffLoading;
+    private bool _isWirkstoffGehaltLoading;
+    private bool _isAwgLoading;
+    private bool _isAwgSchadorgLoading;
+    private bool _isKodelistenLoading;
+    private bool _isKodeLoading;
+    private bool _isAggregatesLoading;
+
+    private static string FormatList<T>(IReadOnlyList<T> items)
+    {
+        var preview = items.Take(20).ToList();
+        var json = JsonSerializer.Serialize(preview, new JsonSerializerOptions { WriteIndented = true });
+        return $"Count: {items.Count}\nPreview (first {preview.Count}):\n{json}";
+    }
+
+    private async Task LoadMittelAsync()
+        => await LoadAsync(ApiClient.GetAllMittelAsync, value => _mittelResult = value, busy => _isMittelLoading = busy);
+
+    private async Task LoadWirkstoffAsync()
+        => await LoadAsync(ApiClient.GetAllWirkstoffAsync, value => _wirkstoffResult = value, busy => _isWirkstoffLoading = busy);
+
+    private async Task LoadWirkstoffGehaltAsync()
+        => await LoadAsync(ApiClient.GetAllWirkstoffGehaltAsync, value => _wirkstoffGehaltResult = value, busy => _isWirkstoffGehaltLoading = busy);
+
+    private async Task LoadAwgAsync()
+        => await LoadAsync(ApiClient.GetAllAwgAsync, value => _awgResult = value, busy => _isAwgLoading = busy);
+
+    private async Task LoadAwgSchadorgAsync()
+        => await LoadAsync(ApiClient.GetAllAwgSchadorgAsync, value => _awgSchadorgResult = value, busy => _isAwgSchadorgLoading = busy);
+
+    private async Task LoadKodelistenAsync()
+        => await LoadAsync(ApiClient.GetFeldnameMappingsAsync, value => _kodelistenResult = value, busy => _isKodelistenLoading = busy);
+
+    private async Task LoadKodeAsync()
+    {
+        var kode = _kodeInput?.Trim();
+        if (string.IsNullOrWhiteSpace(kode))
+        {
+            _error = "Bitte einen Kode eingeben.";
+            return;
+        }
+
+        await LoadAsync(ct => ApiClient.GetKodeAsync(kode, ct), value => _kodeResult = value, busy => _isKodeLoading = busy);
+    }
+
+    private async Task LoadAggregatesAsync()
+        => await LoadAsync(
+            ct => ExportService.LoadAggregatedAsync(null, ct),
+            value => _aggregatesResult = value,
+            busy => _isAggregatesLoading = busy);
+
+    private async Task LoadAsync<T>(
+        Func<CancellationToken, Task<IReadOnlyList<T>>> loader,
+        Action<string> setResult,
+        Action<bool> setBusy)
+    {
+        _error = null;
+        setBusy(true);
+        try
+        {
+            var items = await loader(CancellationToken.None);
+            setResult(FormatList(items));
+        }
+        catch (Exception ex)
+        {
+            _error = ex.Message;
+        }
+        finally
+        {
+            setBusy(false);
+        }
+    }
+}
