@@ -23,8 +23,11 @@ jobs:
       - name: Restore
         run: dotnet restore
 
+      - name: Build
+        run: dotnet build BenjaminBiber.PSM-Api/BenjaminBiber.PSM-Api.csproj -c Release
+
       - name: Pack
-        run: dotnet pack BenjaminBiber.PSM-Api/BenjaminBiber.PSM-Api.csproj -c Release -p:PackageVersion="${{ inputs.version }}" -o ./artifacts
+        run: dotnet pack BenjaminBiber.PSM-Api/BenjaminBiber.PSM-Api.csproj -c Release --no-build -p:PackageVersion="${{ inputs.version }}" -o ./artifacts
 
       - name: Publish to NuGet.org
         run: dotnet nuget push ./artifacts/*.nupkg --api-key "${{ secrets.NUGET_API_KEY }}" --source "https://api.nuget.org/v3/index.json"
