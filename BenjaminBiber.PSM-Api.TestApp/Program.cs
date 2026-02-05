@@ -1,6 +1,6 @@
-using BenjaminBiber.PSM_Api;
-using BenjaminBiber.PSM_Api.Data.Options;
-using BenjaminBiber.PSM_Api.Data.Services;
+using BenjaminBiber.BVL_PSM_Client;
+using BenjaminBiber.BVL_PSM_Client.Data.Options;
+using BenjaminBiber.BVL_PSM_Client.Data.Services;
 using Microsoft.Extensions.Configuration;
 using BenjaminBiber.PSM_Api.TestApp.Components;
 

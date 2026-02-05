@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace BenjaminBiber.PSM_Api.Data.Api;
+namespace BenjaminBiber.BVL_PSM_Client.Data.Api;
 
 public sealed class OrdsResponse<T>
 {

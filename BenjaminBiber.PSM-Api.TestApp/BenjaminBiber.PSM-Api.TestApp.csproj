@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BenjaminBiber.PSM-Api\BenjaminBiber.PSM-Api.csproj" />
+    <ProjectReference Include="..\\BenjaminBiber.BVL-PSM-Client\\BenjaminBiber.BVL-PSM-Client.csproj" />
   </ItemGroup>
 
 </Project>

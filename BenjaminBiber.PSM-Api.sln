@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BenjaminBiber.PSM-Api", "BenjaminBiber.PSM-Api\BenjaminBiber.PSM-Api.csproj", "{499A4265-8256-4D9E-8383-15F7EC4A316F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BenjaminBiber.BVL-PSM-Client", "BenjaminBiber.BVL-PSM-Client\BenjaminBiber.BVL-PSM-Client.csproj", "{499A4265-8256-4D9E-8383-15F7EC4A316F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BenjaminBiber.PSM-Api.TestApp", "BenjaminBiber.PSM-Api.TestApp\BenjaminBiber.PSM-Api.TestApp.csproj", "{639C0C5B-F2AD-44E2-8D04-93A179275981}"
 EndProject

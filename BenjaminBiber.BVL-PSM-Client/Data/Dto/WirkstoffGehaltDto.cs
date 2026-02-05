@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace BenjaminBiber.PSM_Api.Data.Dto;
+namespace BenjaminBiber.BVL_PSM_Client.Data.Dto;
 
 public sealed class WirkstoffGehaltDto
 {

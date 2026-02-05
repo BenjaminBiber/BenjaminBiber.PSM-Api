@@ -1,9 +1,9 @@
-using BenjaminBiber.PSM_Api.Data.Clients;
-using BenjaminBiber.PSM_Api.Data.Options;
+using BenjaminBiber.BVL_PSM_Client.Data.Clients;
+using BenjaminBiber.BVL_PSM_Client.Data.Options;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace BenjaminBiber.PSM_Api;
+namespace BenjaminBiber.BVL_PSM_Client;
 
 public static class ServiceCollectionExtensions
 {

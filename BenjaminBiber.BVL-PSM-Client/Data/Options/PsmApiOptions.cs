@@ -1,4 +1,4 @@
-namespace BenjaminBiber.PSM_Api.Data.Options;
+namespace BenjaminBiber.BVL_PSM_Client.Data.Options;
 
 public sealed class PsmApiOptions
 {

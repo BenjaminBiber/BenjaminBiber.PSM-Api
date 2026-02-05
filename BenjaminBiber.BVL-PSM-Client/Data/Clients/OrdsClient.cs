@@ -1,9 +1,9 @@
 using System.Net.Http.Json;
 using System.Text.Json;
-using BenjaminBiber.PSM_Api.Data.Api;
-using BenjaminBiber.PSM_Api.Data.Options;
+using BenjaminBiber.BVL_PSM_Client.Data.Api;
+using BenjaminBiber.BVL_PSM_Client.Data.Options;
 
-namespace BenjaminBiber.PSM_Api.Data.Clients;
+namespace BenjaminBiber.BVL_PSM_Client.Data.Clients;
 
 public static class OrdsClient
 {

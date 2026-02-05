@@ -1,8 +1,8 @@
 using System.Collections.Concurrent;
-using BenjaminBiber.PSM_Api.Data.Clients;
-using BenjaminBiber.PSM_Api.Data.Models;
+using BenjaminBiber.BVL_PSM_Client.Data.Clients;
+using BenjaminBiber.BVL_PSM_Client.Data.Models;
 
-namespace BenjaminBiber.PSM_Api.Data.Services;
+namespace BenjaminBiber.BVL_PSM_Client.Data.Services;
 
 public sealed class PsmExportService(
     IPsmApiClient apiClient,

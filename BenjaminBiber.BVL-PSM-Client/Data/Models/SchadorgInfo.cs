@@ -1,4 +1,4 @@
-namespace BenjaminBiber.PSM_Api.Data.Models;
+namespace BenjaminBiber.BVL_PSM_Client.Data.Models;
 
 public sealed class SchadorgInfo
 {

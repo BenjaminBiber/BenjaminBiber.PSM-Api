@@ -1,7 +1,7 @@
 using System.Text;
-using BenjaminBiber.PSM_Api.Data.Models;
+using BenjaminBiber.BVL_PSM_Client.Data.Models;
 
-namespace BenjaminBiber.PSM_Api.Data.Services;
+namespace BenjaminBiber.BVL_PSM_Client.Data.Services;
 
 public sealed class CsvBuilder(ExportColumnRegistry columnRegistry)
 {

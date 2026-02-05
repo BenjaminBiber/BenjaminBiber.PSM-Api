@@ -2,12 +2,12 @@ using System.Collections.Concurrent;
 using System.Net;
 using System.Text.Json;
 using Microsoft.Extensions.Options;
-using BenjaminBiber.PSM_Api.Data.Dto;
-using BenjaminBiber.PSM_Api.Data.Models;
-using BenjaminBiber.PSM_Api.Data.Options;
-using BenjaminBiber.PSM_Api.Data.Services;
+using BenjaminBiber.BVL_PSM_Client.Data.Dto;
+using BenjaminBiber.BVL_PSM_Client.Data.Models;
+using BenjaminBiber.BVL_PSM_Client.Data.Options;
+using BenjaminBiber.BVL_PSM_Client.Data.Services;
 
-namespace BenjaminBiber.PSM_Api.Data.Clients;
+namespace BenjaminBiber.BVL_PSM_Client.Data.Clients;
 
 public interface IPsmApiClient
 {
