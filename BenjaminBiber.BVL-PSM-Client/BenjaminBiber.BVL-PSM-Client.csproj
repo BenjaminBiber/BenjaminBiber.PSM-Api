@@ -10,7 +10,7 @@
         <Version>1.0.0</Version>
         <Authors>Benjamin Biber</Authors>
         <Description>PSM API client and export helpers.</Description>
-        <PackageReadmeFile>Read.me</PackageReadmeFile>
+        <PackageReadmeFile>readme.md</PackageReadmeFile>
     </PropertyGroup>
 
     <ItemGroup>
@@ -20,7 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Include="..\\Read.me" Pack="true" PackagePath="/" Link="Read.me" />
+        <None Include="..\\readme.md" Pack="true" PackagePath="/" Link="readme.md" />
     </ItemGroup>
 
 </Project>
